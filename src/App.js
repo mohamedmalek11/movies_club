@@ -17,7 +17,7 @@ function App() {
 
   //changing page data on changing page number
   useEffect(() => {
-    searchMovies("love");
+    searchInput ? searchMovies(searchInput) : searchMovies("love");
   }, [pageNumber]);
 
   const previousPage = () => {
@@ -36,7 +36,7 @@ function App() {
     }
     //set loading indicator
     setisLoading(true);
-    console.log(pageNumber);
+    console.log(title);
     //get the new seraching data
     const responce = await fetch(`${API_URL}&s=${title}&page=${pageNumber}`);
     const data = await responce.json();
@@ -60,7 +60,7 @@ function App() {
             alt="search"
             onClick={() => {
               searchMovies(searchInput);
-              setpageNumber(1)
+              setpageNumber(1);
             }}
           />
         </div>
