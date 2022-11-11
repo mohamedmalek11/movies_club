@@ -10,11 +10,15 @@
 :root {
   --font-roboto: "Roboto Slab", serif;
   --font-raleway: "Raleway", sans-serif;
+  --background-color: #0d1a23;
+  --secondery-color: #193244;
+  --hover-color: #1d3f58;
 }
 
 body {
   font-family: var(--font-roboto);
-  background-color: #212426;
+  /* background-color: #212426; */
+  background-color: var(--background-color);
 }
 
 .app {
@@ -24,15 +28,22 @@ body {
   align-items: center;
   flex-direction: column;
 }
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-auto-flow: column;
+  width: 100%;
+  align-items: center;
+  gap: 30px;
+  max-width: 1100px;
+  padding: 20px 0;
+}
 
 h1 {
   font-size: 3rem;
   letter-spacing: 0.9px;
-  background: linear-gradient(
-    90deg,
-    rgba(249, 211, 180, 1) 0%,
-    rgba(249, 211, 180, 0) 100%
-  );
+  background: linear-gradient(90deg, rgb(155 118 87) 0%, rgb(121 78 43) 100%);
+
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -40,18 +51,17 @@ h1 {
 }
 
 .search {
-  width: 71%;
-  margin: 4rem 0 2rem;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 1.5rem 1.75rem;
+  padding: 1rem 1rem;
   border-radius: 3rem;
-  background: #1f2123;
-  -webkit-box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
-  box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
+  background: var(--background-color);
+  /* -webkit-box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
+  box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527; */
+  -webkit-box-shadow: 5px 5px 7px #000000, -5px -5px 7px #08141b;
+  box-shadow: 5px 5px 7px #000000, -5px -5px 7px #08141b;
 }
 
 .search input {
@@ -64,29 +74,14 @@ h1 {
 
   outline: none;
   color: #a1a1a1;
-  background: #1f2123;
+  background: var(--background-color);
 }
 
 .search img {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
 }
-
-/* .search button {
-  padding: 20px 40px;
-  border-radius: 0.5rem;
-  margin-left: 15px;
-  color: #a1a1a1;
-  font-family: var(--font-raleway);
-  font-weight: 900;
-  letter-spacing: 0.75px;
-  font-size: 1.25rem;
-  cursor: pointer;
-  background: #1f2123;
-  -webkit-box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
-  box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
-} */
 
 .empty {
   width: 100%;
@@ -105,7 +100,7 @@ h1 {
 
 .container {
   width: 100%;
-  margin-top: 3rem;
+  margin-top: 1rem;
 
   display: flex;
   justify-content: center;
@@ -149,13 +144,14 @@ h1 {
 .movie div:nth-of-type(2) img {
   height: 100%;
   width: 100%;
+  object-fit: cover;
 }
 
 .movie div:nth-of-type(3) {
   z-index: 2;
-  background-color: #343739;
+  background-color: var(--secondery-color);
   padding: 16px 24px 24px 24px;
-
+  height: 110px;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -175,6 +171,11 @@ h1 {
   margin-top: 5px;
   font-family: "Roboto Slab", serif;
   color: #f9d3b4;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
 }
 
 .movie:hover div:nth-of-type(2) {
@@ -189,10 +190,34 @@ h1 {
 .movie:hover div:nth-of-type(1) {
   opacity: 1;
 }
+.pages-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.pages-buttons button {
+  all: unset;
+  background-color: var(--secondery-color);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  width: 130px;
+  text-align: center;
+  transition: 0.4s ease all;
+}
+.pages-buttons button:hover{
+  background-color: var(--hover-color);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  width: 130px;
+  transform: scale(1.04);
+}
 
 @media screen and (max-width: 600px) {
   .app {
-    padding: 4rem 2rem;
+    padding: 0rem 2rem !important;
   }
 
   .search {
@@ -208,6 +233,20 @@ h1 {
     width: 20px;
     height: 20px;
   }
+
+  .header {
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+  }
+
+  h1 {
+    text-align: center;
+    width: 100%;
+    font-size: 2rem;
+  }
+  .pages-buttons {
+    margin: 30px 0px;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -216,11 +255,13 @@ h1 {
   }
 
   h1 {
+    text-align: center;
+    width: 100%;
     font-size: 2rem;
   }
 
   .container {
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
 
   .movie {
